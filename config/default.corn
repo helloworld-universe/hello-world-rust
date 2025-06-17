@@ -1,0 +1,5 @@
+let {
+    $author = "John Smith"
+} in {
+    name = $author
+}

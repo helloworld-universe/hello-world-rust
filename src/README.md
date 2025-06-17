@@ -1,0 +1,241 @@
+# Hello World in Rust
+
+This is a tech preview of the best technologies in the Rust ecosystem.
+
+## Features
+- Sysadmin
+    - Dockerfile, docker-compose support
+      - publish to Docker Hub / GitHub Packages Container Registry
+      - messaging (/msg)
+        - iggy
+      - pub/sub (/msg)
+        - rumqttd
+        - nats
+      - caching / kv (/cache)
+        - valkey / dragonfly
+      - jobs (/jobs)
+        - dagu
+        - kala
+        - ratus
+      - database (/db)
+        - rqlite, postgres, clickhouse / duckdb (tablular data)
+        - meilisearch (full-text search)
+        - triplit / rxdb / pouchdb (offline-first)
+        - appwrite / webly (headless cms)
+      - backups (/backups)
+        - rustic
+      - reverse proxy (/proxy)
+        - nginx unit, caddy
+      - tls termination (/tls)
+        - hitch
+      - load balancer (/lb, /health, /ok)
+        - haproxy / relayd
+          - edge
+        - tiny-balancer
+          - round-robin, random, p2c, consistent-hash, least-load, bounded, ip-hash
+        - krakend
+          - circuit breaker, rate limiting, logging, metrics, amqp pub/sub, auto backend discovery, backend response aggregation / filtering, plugins, graphql
+- Dev Ops (/dev)
+  - dev environment
+    - mise
+- Site Reliability Engineer
+  - ...
+- Command line parsing
+  - clap 4
+- Plan
+  - similar to --dry-run , but simply show summary
+- Various output formats
+  - serde
+    - plain-text, json, yaml, toml
+- Config file (/config)
+  - config
+- Exports (/export)
+  - export entire user profile with content
+- Templating
+  - minijinja
+- HTTP server (/web)
+  - axum
+- Middleware (/plugins)
+  - tower-http
+- Websockets (/ws)
+  - socketioxide
+- Web UI (/dashboard)
+  - yew.rs
+- Web app framework (/app)
+  - astro.js
+  - mobile first
+  - offline-ready
+- CSS framework (/css)
+  - tailwind
+- CSS component library
+  - Patternfly
+- UI component library
+  - Svelte
+- Javascript framework (/js)
+  - vue.js
+- Javascript component library
+  - nuxt.js
+- HTTP REST API (/api)
+  - loco.rs
+- GraphQL API (/graphql)
+  - ...
+- gRPC (/rpc)
+  - ...
+- Storage (/files)
+  - OpenDAL
+  - rclone
+- Database ORM (/db)
+  - SeaORM
+- Database migrations (/migrations)
+  - SeaORM
+- Compile-time checked SQL queries (/sql)
+  - SQLx
+- User management (/users)
+  - loco.rs
+- Security (/security)
+  - loco.rs
+    - WebAuthn, passkeys, password hashing, encryption, API keys
+    - openid, mutual auth, passkeys, pass phrase, OPAQUE, TOTP, pin code,
+      SSS, mobile app auth, email, yubi key, biometrics, openssh key + saltpak
+    - duress version of any authentication method
+  - loco-oauth2 (/login, /register)
+    - OAuth2
+  - vpn (/vpn)
+    - defgaurd (OIDC + Wireguard) / tailscale
+    - opkssh (OIDC)
+    - dex (OpenID gateway)
+  - kanidm / pocket id / tinyauth / vouch-proxy (/idc)
+    - openid provider, oidc
+  - user directory (/accounts)
+    - lldap
+  - firewall (/firewall, /idp)
+    - pf / zenarmor
+      - gateway firewall
+    - suricata
+      - network sniffing
+    - modsecurity
+      - application firewall
+    - crowdsec
+      - reporting
+    - wuzah
+      - XDR + SIEM
+- Error handling
+  - human_panic
+  - rootcause
+- Logging (/logs)
+  - env-logger
+  - tracing-subscriber
+  - tracing-appender
+    - log rotation
+- Logging output formats (/logs/settings)
+  - file / json
+  - syslog
+  - loki
+  - graylog2
+  - kafka
+  - mqtt
+  - s3
+- Audit (/audit)
+  - code verification
+    - verus
+- Tracing (/logs/tracing)
+  - opentracing
+  - jaeger
+  - signoz
+  - grafana tempo
+- Metrics (/metrics)
+  - openmetrics
+  - prometheus
+  - grafana
+- Testing (/tests)
+  - nextest
+    - snapshots
+    - run in parallel
+  - BDD
+    - cucumber-rs
+  - HTML report
+    - venom
+    - cargo-llvm-cov
+    - cargo xtask coverage --dev
+  - coverage
+    - cargo-llvm-cov
+  - HTTP REST API testing 
+    - hurl
+  - Contingous Integration (/ci)
+    - woodpecker
+- Benchmarking (/bench)
+  - cargo bench
+  - hyperfine
+- Linting
+  - cargo fmt
+  - cargo clippy --all --tests -- -D warnings
+- Documentation (/docs)
+  - keep-a-changelog (/changelog)
+    - git-cliff
+  - conventional commits (/commits)
+    - cocogitto
+  - OpenAPI docs (/openapi)
+    - rovo
+      - redoc
+      - swagger
+      - scalar
+  - readme (/readme)
+    - readme.so
+  - mdbooks (/manual)
+    - technical book for sysadmins
+  - rustdoc (/manual)
+    - technical manual for programmers
+  - docusaurus (/user-guide)
+    - beautiful user guides for end-users
+  - zola (/blog)
+    - blog for SEO
+    - release notes + changelog for SEO
+    - landing page for SEO
+    - snac for activity pub (https://codeberg.org/grunfink/snac2)
+  - ghost, tinacms (/content)
+    - headless cms
+  - meta (/ten-forward, /meta, /community)
+    - matrix (/chat)
+    - mattermost (/projects)
+    - discourse (/forums)
+  - licenses (/license)
+- Sales
+  - pricing (/pricing, /plans)
+  - CRM (/crm, /clients, /subscriptions)
+  - Testimonials (/user-stories)
+- WASM (/bin)
+  - cargo wasm
+- Repository (/code)
+  - gitea
+    - collaboration
+  - rgit
+    - browsing
+- Release Engineering (quality management system) (/engineering)
+  - packages (/packages, /download)
+    - gitea
+  - package manager (/install, /upgrade, /version)
+    - ...
+  - reproducable builds (/build)
+    - https://docs.docker.com/build/ci/github-actions/reproducible-builds
+  - verification and validation (/sbom)
+    - software bill of rights (sbom)
+      - syft (spdx)
+      - OWASP DependencyTrack
+  - checksums (/checksums)
+    - b3sum (BLAKE-3)
+  - signing (/sigs)
+    - sigstore cosign
+  - status page (/status)
+    - gatus [ developer stats ] dev HA
+    - beszel [ cluster system resources ] dev stats
+    - vigil [ cluster uptime ] dev HA
+    - kener [ uptime, SLA, and incidents ] dev stats HA
+  - helpdesk (/help)
+    - issue queue (/issues)
+      - gitea
+    - wiki (/wiki)
+      - gitea
+    - office hours (/office-hours)
+      - gitea
+    - security advisories (/advisories)
+      - gitea
