@@ -1,0 +1,33 @@
+{
+  // Single-line comment
+  name: "MyApp",
+
+  // Booleans, numbers
+  verbose: true,
+  maxConnections: 20,
+
+  // Optional-like: use null
+  databaseUrl: "postgres://user:pass@localhost/db",
+
+  // Arrays with trailing commas allowed
+  features: [
+    "alpha",
+    "beta",
+    "gamma",
+  ],
+
+  // Object with unquoted keys and trailing commas
+  logging: {
+    level: "info",
+    file: "app.log",
+  },
+
+  // Enum-like (no enums in JSON, so use a string)
+  mode: "Development",
+
+  // Multi-line string
+  description: `
+    This is a multi-line description.
+    JSON5 makes this much easier than JSON.
+  `,
+}

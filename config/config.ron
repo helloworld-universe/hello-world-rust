@@ -1,0 +1,29 @@
+(
+    // A simple string value
+    name: "MyApp",
+
+    // Boolean flag
+    verbose: true,
+
+    // Optional field (use None or Some("value"))
+    database_url: Some("postgres://user:pass@localhost/db"),
+
+    // Number
+    max_connections: 20,
+
+    // List/Array
+    features: [
+        "alpha",
+        "beta",
+        "gamma",
+    ],
+
+    // Nested struct
+    logging: (
+        level: "info",
+        file: "app.log",
+    ),
+
+    // Enum example
+    mode: Development, // assumes enum Mode { Development, Production, Testing }
+)

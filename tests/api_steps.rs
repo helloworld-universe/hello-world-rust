@@ -1,7 +1,7 @@
-use cucumber::{World, given, then, when, gherkin::Step};
+use cucumber::{World, gherkin::Step, given, then, when};
+use hello_world::app;
 use reqwest::{Client, StatusCode};
 use serde_json::Value;
-use hello_world::app;
 
 // --- 1. Define the Test World State ---
 
@@ -79,6 +79,8 @@ fn check_response_json(world: &mut ApiWorld, step: &Step) {
 }
 
 // --- 3. Test Runner Entry Point ---
+//
+// Integration Testing
 
 // Define the entry point for the cucumber tests
 #[tokio::main]

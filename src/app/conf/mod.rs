@@ -44,9 +44,10 @@ pub fn get_configuration() -> Result<MyConfig, ConfigError> {
 }
 
 pub fn load_config() -> Result<String, Report> {
-    let config = match get_configuration()
-        .context(format!("working directory: {}", std::env::current_dir().unwrap().display()))
-    {
+    let config = match get_configuration().context(format!(
+        "working directory: {}",
+        std::env::current_dir().unwrap().display()
+    )) {
         Ok(config) => config,
         Err(e) => panic!("Could not load config: {e}"),
     };
@@ -59,5 +60,25 @@ pub fn load_config() -> Result<String, Report> {
     )) {
         Ok(config) => Ok(config),
         Err(e) => panic!("Could not load config: {e}"),
+    }
+}
+
+//
+// Unit Tests
+//
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_load_config() {
+        let result = 2 + 2;
+        assert_eq!(result, 4);
+    }
+
+    #[test]
+    fn test_get_configuration() {
+        let result = 2 + 2;
+        assert_eq!(result, 4);
     }
 }

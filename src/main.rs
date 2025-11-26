@@ -1,8 +1,9 @@
 mod app;
 mod logging;
 
-use human_panic::{Metadata, setup_panic};
 use hello_world::app::ExitCode;
+use human_panic::{Metadata, setup_panic};
+use std::time::Instant;
 
 #[tokio::main]
 async fn main() {
@@ -24,6 +25,9 @@ async fn main() {
             .support("- Open a support request by email to support@mycompany.com")
     );
 
+    // Measure duration
+    let start = Instant::now();
+
     //----------------------------------------------------------------------
     // 3. Set up logging
     //----------------------------------------------------------------------
@@ -39,10 +43,18 @@ async fn main() {
     //----------------------------------------------------------------------
     match app::run().await {
         Ok(_) => {
+            let duration = start.elapsed();
+            let nanoseconds = duration.as_nanos(); // u128
+            tracing::debug!("Elapsed time in nanoseconds: {}", nanoseconds);
+
             tracing::info!("Application completed successfully");
             std::process::exit(ExitCode::Ok as i32);
         }
         Err(err) => {
+            let duration = start.elapsed();
+            let nanoseconds = duration.as_nanos(); // u128
+            tracing::debug!("Elapsed time in nanoseconds: {}", nanoseconds);
+
             // Log it with tracing before panicking
             tracing::error!(error = ?err, "Application error occurred");
 

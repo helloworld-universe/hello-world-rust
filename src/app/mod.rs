@@ -1,8 +1,10 @@
+mod cli;
 mod conf;
 
 use conf::MyConfig as Config;
 
 use axum::{extract::State, response::Json};
+use http::{HeaderName, HeaderValue};
 use minijinja::{Environment, context};
 use rootcause::prelude::*;
 use rovo::{Router, routing::get, rovo};
@@ -13,6 +15,7 @@ use rovo::{
 use rovo::{schemars, schemars::JsonSchema};
 use serde::Serialize;
 use std::{fs, path::Path};
+use tower_http::set_header::SetResponseHeaderLayer;
 
 /// Structured exit codes (Unix-friendly, Windows-friendly)
 #[derive(Debug)]
@@ -50,6 +53,10 @@ async fn get_user(State(_state): State<AppState>) -> impl IntoApiResponse {
 pub async fn run() -> Result<(), Report> {
     tracing::debug!("Starting app logic");
 
+    // Parse the arguments from the command line
+    let mycli = cli::parse_cli();
+
+    // Load config
     let toml: String = conf::load_config()?;
     let config: Config = toml::from_str(&toml)?;
 
@@ -66,10 +73,12 @@ pub async fn run() -> Result<(), Report> {
     env.add_template("hello.tmpl", &hello_content)?;
 
     let template = env.get_template("hello.tmpl").unwrap();
-    println!(
-        "{}",
-        template.render(context! { name => config.name }).unwrap()
-    );
+    let name: String = match mycli.name {
+        Some(name) => name,
+        None => config.name,
+    };
+
+    println!("{}", template.render(context! { name => name }).unwrap());
 
     let state = AppState {};
 
@@ -84,9 +93,32 @@ pub async fn run() -> Result<(), Report> {
         .with_scalar("/scalar")
         .with_state(state);
 
+    // Convert into an Axum router:
+    let mut app: axum::Router<_> = app.into();
+
+    // Now you can add layers:
+    app = app.layer(SetResponseHeaderLayer::overriding(
+        HeaderName::from_static("x-hello-world"),
+        HeaderValue::from_str(&name).unwrap(),
+    ));
+
     let listener = tokio::net::TcpListener::bind("0.0.0.0:3000").await.unwrap();
 
-    axum::serve(listener, app).await.unwrap();
+    axum::serve(listener, app)
+        .with_graceful_shutdown(async move {
+            // An async function that waits for the Ctrl+C signal.
+            tokio::signal::ctrl_c()
+                .await
+                .expect("failed to install Ctrl+C handler");
+
+            if mycli.verbose {
+                tracing::info!("\n\nReceived Ctrl+C, starting graceful shutdown...");
+            } else {
+                tracing::debug!("\n\nReceived Ctrl+C, starting graceful shutdown...");
+            }
+        })
+        .await
+        .unwrap();
 
     Ok(())
 }

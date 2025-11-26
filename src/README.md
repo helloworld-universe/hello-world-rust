@@ -49,6 +49,8 @@ This is a tech preview of the best technologies in the Rust ecosystem.
     - plain-text, json, yaml, toml
 - Config file (/config)
   - config
+- Math
+  - Symbolica
 - Exports (/export)
   - export entire user profile with content
 - Templating
