@@ -1,6 +1,8 @@
 mod cli;
 mod conf;
+mod plugins;
 
+use plugins::plugin_main;
 use conf::MyConfig as Config;
 
 use axum::{extract::State, response::Json};
@@ -52,6 +54,15 @@ async fn get_user(State(_state): State<AppState>) -> impl IntoApiResponse {
 
 pub async fn run() -> Result<(), Report> {
     tracing::debug!("Starting app logic");
+
+    // Spawn plugin_main in the background
+    tracing::info!("Load plugins...");
+    tokio::spawn(async move {
+        if let Err(e) = plugin_main().await {
+            panic!("Plugin system crashed: {:?}", e);
+        }
+    });
+    tracing::info!("Plugin system is running in the background.");
 
     // Parse the arguments from the command line
     let mycli = cli::parse_cli();

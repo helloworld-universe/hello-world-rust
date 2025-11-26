@@ -18,7 +18,9 @@ This is a tech preview of the best technologies in the Rust ecosystem.
         - kala
         - ratus
       - database (/db)
-        - rqlite, postgres, clickhouse / duckdb (tablular data)
+        - rqlite / postgres (tablular data)
+        - clickhouse / duckdb (column based data)
+        - pocketdb, trailblaze, surrealdb (rest api, graphql)
         - meilisearch (full-text search)
         - triplit / rxdb / pouchdb (offline-first)
         - appwrite / webly (headless cms)
@@ -124,6 +126,9 @@ This is a tech preview of the best technologies in the Rust ecosystem.
 - Error handling
   - human_panic
   - rootcause
+  - ariadne
+  - ariadne
+  - miette
 - Logging (/logs)
   - env-logger
   - tracing-subscriber

@@ -19,11 +19,11 @@ pub fn parse_cli() -> Cli {
     // Parse the arguments from the command line
     let mycli = Cli::parse();
     if mycli.name.is_some() {
-        tracing::debug!("Hello, {}!", mycli.name.clone().unwrap());
+        tracing::info!("Hello, {}!", mycli.name.clone().unwrap());
     }
 
     if mycli.verbose {
-        tracing::debug!("Parsed arguments: {:?}", mycli);
+        tracing::info!("Parsed arguments: {:?}", mycli);
     }
 
     mycli

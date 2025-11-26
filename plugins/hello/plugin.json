@@ -1,0 +1,8 @@
+{
+  "name": "hello",
+  "version": "0.1.0",
+  "subscriptions": ["hello_world", "boot"],
+  "entry": "handle_event",
+  "alloc": "alloc",
+  "license": "(ISC OR GPL-3.0)"
+}
