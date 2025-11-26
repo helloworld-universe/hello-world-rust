@@ -1,3 +1,4 @@
+
 - spawn plugins as separate processes and manage timeouts (cross-platform),
 - migrate the host to Wasmtime and show `ResourceLimiter` usage,
 - implement host-provided import APIs (e.g., `host::log`) and an example plugin using them,
